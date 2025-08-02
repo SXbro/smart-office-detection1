@@ -54,6 +54,59 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+def validate_image(uploaded_file):
+    """
+    Validate and safely load an uploaded image file.
+    
+    Args:
+        uploaded_file: Streamlit UploadedFile object
+        
+    Returns:
+        tuple: (PIL.Image object or None, error_message or None)
+    """
+    if uploaded_file is None:
+        return None, "No file uploaded"
+    
+    try:
+        # Check file size (optional: prevent extremely large files)
+        file_size = uploaded_file.size
+        if file_size > 50 * 1024 * 1024:  # 50MB limit
+            return None, "File too large (max 50MB allowed)"
+        
+        # Reset file pointer to beginning
+        uploaded_file.seek(0)
+        
+        # Try to open with PIL
+        image = Image.open(uploaded_file)
+        
+        # Verify it's actually an image by trying to load it
+        image.verify()
+        
+        # Reopen the file since verify() closes it
+        uploaded_file.seek(0)
+        image = Image.open(uploaded_file)
+        
+        # Convert to RGB if needed (handles various formats)
+        if image.mode != 'RGB':
+            try:
+                image = image.convert('RGB')
+            except Exception as conv_error:
+                return None, f"Failed to convert image to RGB: {str(conv_error)}"
+        
+        # Additional validation: check dimensions
+        width, height = image.size
+        if width < 10 or height < 10:
+            return None, "Image too small (minimum 10x10 pixels)"
+        
+        if width > 10000 or height > 10000:
+            return None, "Image too large (maximum 10000x10000 pixels)"
+        
+        return image, None
+        
+    except Exception as e:
+        error_msg = f"Invalid image file: {str(e)}"
+        return None, error_msg
+
 class OfficeDetectionApp:
     def __init__(self):
         self.class_names = ['person', 'chair', 'monitor', 'keyboard', 'laptop', 'phone']
@@ -386,53 +439,70 @@ def main():
             help="Upload an image containing office objects"
         )
 
+        # FIXED: Robust image handling with validation
         if uploaded_file is not None:
-            # Load and display original image
-            image = Image.open(uploaded_file)
+            # Validate and load the image safely
+            image, error_message = validate_image(uploaded_file)
+            
+            if error_message:
+                # Display error message for invalid images
+                st.error(f"❌ Image Error: {error_message}")
+                st.info("Please upload a valid image file (PNG, JPG, JPEG, BMP, or TIFF)")
+            elif image is not None:
+                # Only display and process if image is valid
+                st.subheader("📸 Original Image")
+                try:
+                    st.image(image, caption="Uploaded Image", use_container_width=True)
+                except Exception as display_error:
+                    st.error(f"❌ Failed to display image: {str(display_error)}")
+                    image = None  # Reset image to prevent further processing
 
-            # Convert to RGB if needed
-            if image.mode != 'RGB':
-                image = image.convert('RGB')
+                # Run detection only if image is valid
+                if image is not None and st.session_state.model_loaded:
+                    if st.button("🔍 Run Detection", type="primary"):
+                        with st.spinner("Detecting objects..."):
+                            try:
+                                # Convert PIL to numpy array for YOLO
+                                img_array = np.array(image)
 
-            st.subheader("📸 Original Image")
-            st.image(image, caption="Uploaded Image", use_container_width=True)
+                                # Run detection
+                                results, error = app.detect_objects(
+                                    img_array,
+                                    conf_threshold=conf_threshold,
+                                    iou_threshold=iou_threshold
+                                )
 
-            # Run detection
-            if st.session_state.model_loaded:
-                if st.button("🔍 Run Detection", type="primary"):
-                    with st.spinner("Detecting objects..."):
-                        # Convert PIL to numpy array for YOLO
-                        img_array = np.array(image)
+                                if error:
+                                    st.error(f"Detection failed: {error}")
+                                elif results is not None:
+                                    # Draw detections
+                                    detected_image, detections = app.draw_detections(image, results)
 
-                        # Run detection
-                        results, error = app.detect_objects(
-                            img_array,
-                            conf_threshold=conf_threshold,
-                            iou_threshold=iou_threshold
-                        )
-
-                        if error:
-                            st.error(f"Detection failed: {error}")
-                        elif results is not None:
-                            # Draw detections
-                            detected_image, detections = app.draw_detections(image, results)
-
-                            # Display results
-                            st.subheader("🎯 Detection Results")
-                            st.image(detected_image, caption="Detected Objects", use_container_width=True)
-
-                            # Store results in session state
-                            st.session_state.detections = detections
-                            st.session_state.detected_image = detected_image
-                            
-                            if detections:
-                                st.success(f"✅ Detected {len(detections)} objects!")
-                            else:
-                                st.info("ℹ️ No objects detected with current confidence threshold.")
-                        else:
-                            st.warning("No objects detected in the image.")
+                                    # Display results
+                                    st.subheader("🎯 Detection Results")
+                                    try:
+                                        st.image(detected_image, caption="Detected Objects", use_container_width=True)
+                                        
+                                        # Store results in session state
+                                        st.session_state.detections = detections
+                                        st.session_state.detected_image = detected_image
+                                        
+                                        if detections:
+                                            st.success(f"✅ Detected {len(detections)} objects!")
+                                        else:
+                                            st.info("ℹ️ No objects detected with current confidence threshold.")
+                                    except Exception as result_error:
+                                        st.error(f"❌ Failed to display detection results: {str(result_error)}")
+                                else:
+                                    st.warning("No objects detected in the image.")
+                                    
+                            except Exception as detection_error:
+                                st.error(f"❌ Detection process failed: {str(detection_error)}")
+                                
+                elif image is not None and not st.session_state.model_loaded:
+                    st.warning("⚠️ Please load a model first using the sidebar.")
             else:
-                st.warning("⚠️ Please load a model first using the sidebar.")
+                st.warning("⚠️ Failed to load the uploaded image. Please try a different file.")
 
     with col2:
         st.header("📊 Detection Analytics")
