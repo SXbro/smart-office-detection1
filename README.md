@@ -1,1 +1,0 @@
-# smart-office-detection1
