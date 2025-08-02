@@ -38,7 +38,7 @@ A real-time object detection system designed specifically for smart office envir
 
 ```bash
 # Clone the repository
-git clone https://github.com/SXbro/smart-office-detection-tool.git
+git clone https://github.com/SXbro/smart-office-detection1.git
 cd smart-office-detection
 
 # Install dependencies
