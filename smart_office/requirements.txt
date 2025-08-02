@@ -1,0 +1,31 @@
+# Smart Office Challenge - Python 3.10 Compatible Requirements
+
+# Core ML and Computer Vision (3.10 compatible versions)
+ultralytics==8.0.196
+torch==2.0.1
+torchvision==0.15.2
+opencv-python==4.8.0.76
+Pillow==10.0.0
+numpy==1.24.3
+
+# Data Processing and Analysis
+pandas==2.0.3
+scikit-learn==1.3.0
+matplotlib==3.7.2
+seaborn==0.12.2
+
+# Web Application
+streamlit==1.25.0
+plotly==5.15.0
+
+# Utilities
+PyYAML==6.0.1
+tqdm==4.65.0
+psutil==5.9.5
+
+# Optional: For enhanced functionality
+imageio==2.31.1
+
+# Development tools (optional)
+pytest==7.4.0
+black==23.7.0
