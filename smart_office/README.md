@@ -34,14 +34,14 @@ A real-time object detection system designed specifically for smart office envir
 - Python 3.11.7
 - pip package manager
 
-###🛠️ Python Environment Setup (Python 3.11.7)
+🛠️ Python Environment Setup (Python 3.11.7)
 
 This project was built and tested with Python 3.11.7. Please install this exact version before running the code.
 
 Windows
 
 # Step 1: Download the Python 3.11.7 installer
-Start-Process "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe"
+Start-Process https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe
 
 # Step 2: Run the installer manually and during setup, make sure to:
 #   ✅ Check "Add Python 3.11 to PATH"
@@ -54,7 +54,7 @@ python --version
 macOs 
 
 # Step 1: Install Homebrew if you haven't already
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
 
 # Step 2: Install pyenv (a tool to manage multiple Python versions)
 brew install pyenv
