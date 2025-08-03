@@ -4,13 +4,13 @@ A real-time object detection system designed specifically for smart office envir
 
 ## 🎥 Demo Video
 
-[\*\*📺 Watch the Demo ](https://drive.google.com/file/d/1WqyaKyNfI4AgLVIcGNt5j3UP3SRcBH25/view?usp=drivesdk)
+[**📺 Watch the Demo**](https://drive.google.com/file/d/1WqyaKyNfI4AgLVIcGNt5j3UP3SRcBH25/view?usp=drivesdk)
 
 ## ✨ Features
 
 - **Real-time Object Detection**: Powered by YOLOv8 for fast and accurate detection
 - **Office-Specific Model**: Custom trained model optimized for office environments
-- **6 Object Categories**: Detects person, laptop, chair, phone,monitor,keyboard
+- **6 Object Categories**: Detects person, laptop, chair, phone, monitor, keyboard
 - **User-Friendly Interface**: Clean Streamlit web application
 - **Image Upload Support**: Easy drag-and-drop image uploading
 - **Bounding Box Visualization**: Clear visual representation of detected objects
@@ -19,7 +19,7 @@ A real-time object detection system designed specifically for smart office envir
 
 ## 🛠️ Tech Stack
 
-- **Python 3.11.7**- Core programming language
+- **Python 3.11.7** - Core programming language
 - **Streamlit** - Web application framework
 - **Ultralytics YOLOv8** - Object detection model
 - **Roboflow** - Dataset management and model training
@@ -34,40 +34,83 @@ A real-time object detection system designed specifically for smart office envir
 - Python 3.11.7
 - pip package manager
 
-##🛠️ Python Environment Setup (Python 3.11.7)
+## 🛠️ Python Environment Setup (Python 3.11.7)
 
--This project was built and tested with Python 3.11.7. Please install this exact version before running the code.
+This project was built and tested with Python 3.11.7. Please install this exact version before running the code.
 
-#Windows
+### Windows
 
-Step 1: Download the Python 3.11.7 installer
-Start-Process https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe
+**Step 1: Download Python 3.11.7**
+```powershell
+# Open PowerShell as Administrator and run:
+Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -OutFile "python-3.11.7-amd64.exe"
+```
 
-Step 2: Run the installer manually and during setup, make sure to:
-✅ Check "Add Python 3.11 to PATH"
-✅ Optionally choose "Install for all users"
+**Step 2: Install Python**
+```powershell
+# Run the installer with automatic setup:
+.\python-3.11.7-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+```
 
-Step 3: After installation, verify the Python version
+**Step 3: Verify Installation**
+```powershell
+# Close and reopen PowerShell, then verify:
 python --version
+```
 
+**Alternative Manual Installation:**
+1. Download: https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe
+2. Run installer and check "Add Python 3.11 to PATH"
+3. Verify with `python --version`
 
-##macOs 
+### macOS
 
- Step 1: Install Homebrew if you haven't already
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+**Step 1: Install Homebrew (if not already installed)**
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-Step 2: Install pyenv (a tool to manage multiple Python versions)
+**Step 2: Install pyenv**
+```bash
 brew install pyenv
+```
 
-Step 3: Install Python 3.11.7 using pyenv
+**Step 3: Install Python 3.11.7**
+```bash
 pyenv install 3.11.7
+```
 
-Step 4: Set Python 3.11.7 as the global default version
+**Step 4: Set as global version**
+```bash
 pyenv global 3.11.7
+```
 
-Step 5: Verify the Python version
+**Step 5: Update shell configuration**
+```bash
+# For zsh (default on macOS):
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+source ~/.zshrc
+
+# For bash:
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+**Step 6: Verify Installation**
+```bash
 python --version
+```
 
+**Alternative Direct Installation:**
+```bash
+# Download and install directly:
+curl -O https://www.python.org/ftp/python/3.11.7/python-3.11.7-macos11.pkg
+sudo installer -pkg python-3.11.7-macos11.pkg -target /
+```
 
 ### Installation & Run
 
