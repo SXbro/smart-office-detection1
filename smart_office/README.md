@@ -31,7 +31,7 @@ A real-time object detection system designed specifically for smart office envir
 
 ### Prerequisites
 
-- Python 3.10 or higher
+- Python 3.10 
 - pip package manager
 
 ### Installation & Run
@@ -63,11 +63,11 @@ The model is trained to detect the following office objects:
 3. **Chair** - Office chairs and seating
 4. **Phone** - Mobile phones and desk phones
 5. **Monitor** - Computer monitors and displays
-6. **Desk** - Office desks and workstations
+6. **Keyboard** - Keyboards that located in front of the monitor 
 
 ## 🔮 Future Enhancements
 
-- Improving the model metrics by training and adding more images to rhe dataset
+- Improving the model metrics by training and adding more images to the dataset
 
 ## ⚠️ Limitations
 
