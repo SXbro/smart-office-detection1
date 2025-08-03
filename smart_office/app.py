@@ -452,7 +452,8 @@ def main():
                 # Only display and process if image is valid
                 st.subheader("📸 Original Image")
                 try:
-                    st.image(image, caption="Uploaded Image", use_container_width=True)
+                    # FIXED: Changed use_container_width to use_column_width for compatibility
+                    st.image(image, caption="Uploaded Image", use_column_width=True)
                 except Exception as display_error:
                     st.error(f"❌ Failed to display image: {str(display_error)}")
                     image = None  # Reset image to prevent further processing
@@ -481,7 +482,8 @@ def main():
                                     # Display results
                                     st.subheader("🎯 Detection Results")
                                     try:
-                                        st.image(detected_image, caption="Detected Objects", use_container_width=True)
+                                        # FIXED: Changed use_container_width to use_column_width for compatibility
+                                        st.image(detected_image, caption="Detected Objects", use_column_width=True)
                                         
                                         # Store results in session state
                                         st.session_state.detections = detections
@@ -554,33 +556,7 @@ def main():
                     </div>
                     """, unsafe_allow_html=True)
 
-            # Download results
-            # st.subheader("💾 Export Results")
-
-            # # Export detection data as JSON
-            # if st.button("📄 Download Detection Data"):
-            #     export_data = {
-            #         'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-            #         'model_path': st.session_state.get('model_path', 'Unknown'),
-            #         'parameters': {
-            #             'confidence_threshold': conf_threshold,
-            #             'iou_threshold': iou_threshold
-            #         },
-            #         'detections': detections,
-            #         'summary': {
-            #             'total_objects': len(detections),
-            #             'average_confidence': float(np.mean([d['confidence'] for d in detections])),
-            #             'class_distribution': dict(summary_df.set_index('Object')['Count'])
-            #             if summary_df is not None else {}
-            #         }
-            #     }
-
-            #     st.download_button(
-            #         label="📥 Download JSON",
-            #         data=json.dumps(export_data, indent=2),
-            #         file_name=f"detection_results_{int(time.time())}.json",
-            #         mime="application/json"
-            #     )
+            
         else:
             st.info("👆 Upload an image and run detection to see analytics.")
 
