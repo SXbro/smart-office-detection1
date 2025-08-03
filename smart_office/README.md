@@ -19,7 +19,7 @@ A real-time object detection system designed specifically for smart office envir
 
 ## 🛠️ Tech Stack
 
-- **Python 3.11.7** - Core programming language
+- **Python 3.10** - Core programming language
 - **Streamlit** - Web application framework
 - **Ultralytics YOLOv8** - Object detection model
 - **Roboflow** - Dataset management and model training
@@ -31,25 +31,25 @@ A real-time object detection system designed specifically for smart office envir
 
 ### Prerequisites
 
-- Python 3.11.7
+- Python 3.10
 - pip package manager
 
-## 🛠️ Python Environment Setup (Python 3.11.7)
+## 🛠️ Python Environment Setup (Python 3.10)
 
-This project was built and tested with Python 3.11.7. Please install this exact version before running the code.
+This project was built and tested with Python 3.10. Please install this version before running the code.
 
 ### Windows
 
-**Step 1: Download Python 3.11.7**
+**Step 1: Download Python 3.10**
 ```powershell
 # Open PowerShell as Administrator and run:
-Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -OutFile "python-3.11.7-amd64.exe"
+Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.10.12/python-3.10.12-amd64.exe" -OutFile "python-3.10.12-amd64.exe"
 ```
 
 **Step 2: Install Python**
 ```powershell
 # Run the installer with automatic setup:
-.\python-3.11.7-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+.\python-3.10.12-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
 ```
 
 **Step 3: Verify Installation**
@@ -59,8 +59,8 @@ python --version
 ```
 
 **Alternative Manual Installation:**
-1. Download: https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe
-2. Run installer and check "Add Python 3.11 to PATH"
+1. Download: https://www.python.org/ftp/python/3.10.12/python-3.10.12-amd64.exe
+2. Run installer and check "Add Python 3.10 to PATH"
 3. Verify with `python --version`
 
 ### macOS
@@ -75,14 +75,14 @@ python --version
 brew install pyenv
 ```
 
-**Step 3: Install Python 3.11.7**
+**Step 3: Install Python 3.10**
 ```bash
-pyenv install 3.11.7
+pyenv install 3.10.12
 ```
 
 **Step 4: Set as global version**
 ```bash
-pyenv global 3.11.7
+pyenv global 3.10.12
 ```
 
 **Step 5: Update shell configuration**
@@ -108,8 +108,8 @@ python --version
 **Alternative Direct Installation:**
 ```bash
 # Download and install directly:
-curl -O https://www.python.org/ftp/python/3.11.7/python-3.11.7-macos11.pkg
-sudo installer -pkg python-3.11.7-macos11.pkg -target /
+curl -O https://www.python.org/ftp/python/3.10.12/python-3.10.12-macos11.pkg
+sudo installer -pkg python-3.10.12-macos11.pkg -target /
 ```
 
 ### Installation & Run
