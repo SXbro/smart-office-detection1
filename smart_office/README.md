@@ -192,7 +192,7 @@ SOFTWARE.
 - **Roboflow** - For providing excellent dataset management and model training platform
 - **Ultralytics** - For the powerful YOLOv8 implementation
 - **Streamlit** - For the intuitive web app framework
-- **Smart Office Hackathon** - For inspiring this innovative project
+- **Humble bee Ai Hackathon** - For inspiring this innovative project
 
 ---
 
